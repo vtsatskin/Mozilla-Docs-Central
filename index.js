@@ -89,9 +89,13 @@ function registerDoc(config, github_remote, callback) {
 function ghPagesUrl(remoteUrl) {
   var segments = remoteUrl.split('/');
   var length = segments.length;
-  var user = segments[length-2];
+
+  // Removes ssh info if applicible
+  var user = segments[length-2].replace(/^.*\:/, "");
+
   // Removes trailing ".git" if applicible
   var repoName = segments[length-1].replace(/\.git$/, "");
+
   return "http://" + user + ".github.io/" + repoName;
 }
 
